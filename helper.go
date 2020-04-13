@@ -60,22 +60,22 @@ func init() {
 func updateClientConfig() {
 	data, err := JSONMarshal(&clientConfig)
 	if err != nil {
-		log.Println("json format error(%v)")
+		log.Println("json format error:", err)
 	}
 	err = ioutil.WriteFile(path+"/cli-config.json", data, 0644)
 	if err != nil {
-		log.Println("update client config failed:%v")
+		log.Println("update client config failed:", err)
 	}
 }
 
 func updateV2RayConfig() {
 	data, err := JSONMarshal(&vconfig)
 	if err != nil {
-		log.Println("json format error(%v)")
+		log.Println("json format error: ", err)
 	}
 	err = ioutil.WriteFile(path+"/v2ray/config.json", data, 0644)
 	if err != nil {
-		log.Println("update v2ray config failed:%v")
+		log.Println("update v2ray config failed: ", err)
 	}
 }
 
@@ -124,13 +124,13 @@ func updateServers() {
 	req, err := http.NewRequest("GET", URL, nil)
 	//req.Header.Set() anything u would like to change
 	if err != nil {
-		log.Println("update subscribe servers error: %v", err)
+		log.Println("update subscribe servers error: ", err)
 		return
 	}
 
 	reply, err := clent.Do(req)
 	if err != nil {
-		log.Println("update subscribe servers error: %v", err)
+		log.Println("update subscribe servers error: ", err)
 		return
 	}
 	defer reply.Body.Close()
@@ -145,7 +145,7 @@ func updateServers() {
 		tempVD := new(VmessData)
 		step3, _ := base64.StdEncoding.DecodeString(temp)
 		if err := json.Unmarshal(step3, tempVD); err != nil {
-			log.Println("Decode error %v", err)
+			log.Println("Decode error ", err)
 			continue
 		}
 		tempServers = append(tempServers, tempVD)
