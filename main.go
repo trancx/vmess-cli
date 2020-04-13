@@ -29,6 +29,7 @@ func listFiles(path string) func(string) []string {
 var completer = readline.NewPrefixCompleter(
 	readline.PcItem("show"),
 	readline.PcItem("subs"),
+	readline.PcItem("select"),
 	readline.PcItem("start"),
 	readline.PcItem("stop"),
 	readline.PcItem("update"),

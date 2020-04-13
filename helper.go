@@ -100,7 +100,9 @@ func selectServer(idx int) {
 	clientConfig.CurIdx = idx
 	updateClientConfig()
 	updateV2RayConfig()
-	reloadV2Ray()
+	if process != nil {
+		reloadV2Ray()
+	}
 }
 
 func setSubscribeURL(URL string) {
